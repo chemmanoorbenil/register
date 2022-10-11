@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from.models import Profile
-from .models import User
+from.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'phone_number', 'age',)
+        fields = ('first_name', 'last_name', 'phone_number', 'age','img','img_cover')
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -28,5 +28,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             last_name=profile_data['last_name'],
             phone_number=profile_data['phone_number'],
             age=profile_data['age'],
+            img=profile_data['img'],
+            img_cover=profile_data['img_cover'],
         )
         return user
