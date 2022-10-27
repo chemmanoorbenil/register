@@ -64,8 +64,8 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50, unique=False)
     phone_number = models.CharField(max_length=10, unique=True, null=False, blank=False)
     age = models.PositiveIntegerField(null=False, blank=False)
-    img=models.ImageField(upload_to='product',blank=True)
-    img_cover=models.ImageField(upload_to='products',blank=True)
+    # img=models.ImageField(upload_to='product',blank=True)
+    # img_cover=models.ImageField(upload_to='products',blank=True)
 
     class Meta:
         db_table = "profile"
