@@ -33,6 +33,7 @@ class UserProfileView(RetrieveAPIView):
                     'last_name': user_profile.last_name,
                     'phone_number': user_profile.phone_number,
                     'age': user_profile.age,
+                    'id':user_profile.id,
 
                     }]
                 }
