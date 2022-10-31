@@ -15,18 +15,29 @@ from rest_framework_jwt.settings import api_settings
 
 class UserSerializer(serializers.ModelSerializer):
 
+
+    # user_id = serializers.SerializerMethodField('get_user_id')
+
+
+
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'phone_number', 'age',)
+        fields = ('first_name', 'last_name', 'phone_number', 'age')
+    # def get_user_id(self,obj):
+    #     return (obj.user_id.id)
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
 
     profile = UserSerializer(required=False)
 
+    id = serializers.SerializerMethodField('get_user_id')
+    def get_user_id(self,obj):
+        return (obj.User.id)
+
     class Meta:
         model = User
-        fields = ('email', 'password', 'profile')
+        fields = ('email', 'password', 'profile','id')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -38,6 +49,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             last_name=profile_data['last_name'],
             phone_number=profile_data['phone_number'],
             age=profile_data['age'],
+            # id=profile_data['id']
             # img=profile_data['img'],
             # img_cover=profile_data['img_cover'],
         )

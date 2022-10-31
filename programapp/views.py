@@ -8,7 +8,7 @@ from .serializers import UserRegistrationSerializer, UserLoginSerializer
 # create the endpoint for logging the user
 from rest_framework.views import APIView
 # #-------------------------------------------------------
-from.models import Profile
+from.models import Profile,User
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -23,19 +23,22 @@ class UserProfileView(RetrieveAPIView):
     def get(self, request):
         try:
             user_profile = Profile.objects.get(user=request.user)
+            # user_id=User.objects.get(id)
             status_code = status.HTTP_200_OK
             response = {
                 'success': 'true',
                 'status code': status_code,
                 'message': 'User profile fetched successfully',
-                'data': [{
+                'data': {
                     'first_name': user_profile.first_name,
                     'last_name': user_profile.last_name,
                     'phone_number': user_profile.phone_number,
                     'age': user_profile.age,
                     'id':user_profile.id,
+                    # 'user_id':user_profile.user_id
+                    # 'id':user_id.id,
 
-                    }]
+                    }
                 }
 
         except Exception as e:
